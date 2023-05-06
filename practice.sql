@@ -13,6 +13,9 @@ SELECT store_id,COUNT(*) FROM customer
 GROUP BY store_id
 HAVING COUNT(*) > 300;
 
+------------
+
+SELECT * from customer WHERE customer_id = NULL;
 
 
 
