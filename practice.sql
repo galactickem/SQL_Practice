@@ -45,3 +45,21 @@ FROM orders;
 SELECT totalOrder;
 END $$
 CALL GetTotalOrder();
+
+
+-------
+
+-- GetOrderByStatus
+DELIMITER $$
+CREATE PROCEDURE GetOrderByStatus(
+IN orderStatus varchar(25),
+OUT total INT)
+BEGIN
+SELECT count(orderNumber)
+INTO total
+FROM orders
+WHERE status = orderStatus;
+END $$
+CALL GetOrderByStatus('Shipped', @total);
+SELECT @total;
+
