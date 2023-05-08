@@ -62,4 +62,22 @@ WHERE status = orderStatus;
 END $$
 CALL GetOrderByStatus('Shipped', @total);
 SELECT @total;
+------
 
+DELIMITER $$
+CREATE PROCEDURE GetClientByCountry(IN countryParam VARCHAR(25))
+BEGIN
+SELECT
+customers.customerName AS customerName,
+CONCAT(customers.contactLastName, ' ', customers.contactFirstName) AS
+contactName,
+CONCAT(employees.lastName, ' ', employees.firstName) AS salesRepName,
+employees.email AS salesRepEmail,
+customers.creditLimit AS creditLimit
+FROM
+customers
+INNER JOIN employees ON c.salesRepEmployeeNumber = e.employeeNumber
+WHERE
+c.country = countryParam;
+END $$
+DELIMITER ;
