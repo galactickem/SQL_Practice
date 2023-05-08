@@ -18,4 +18,30 @@ HAVING COUNT(*) > 300;
 SELECT * from customer WHERE customer_id = NULL;
 
 
+----
 
+DELIMITER $$
+CREATE PROCEDURE GetCustomers()
+BEGIN
+SELECT
+customerName,
+city,
+state,
+postalCode,
+country
+FROM customers
+ORDER BY customerName;
+END $$
+DELIMITER ;
+SELECT * FROM customers;
+CALL GetCustomers();
+-- GetTotalOrder()
+DELIMITER $$
+CREATE PROCEDURE GetTotalOrder()
+BEGIN
+DECLARE totalOrder INT DEFAULT 0,
+SELECT count(*) INTO GetTotalOrder
+FROM orders;
+SELECT totalOrder;
+END $$
+CALL GetTotalOrder();
